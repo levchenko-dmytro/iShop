@@ -15,6 +15,11 @@ export const Navbar: React.FC = () => {
   const { pathname } = useLocation();
   const { favouriteItems, cartItems } = useContext(GlobalContext);
 
+  const qntOfItemsInCart = cartItems.reduce(
+    (acc, item) => acc + item.quantity,
+    0,
+  );
+
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
 
@@ -140,7 +145,7 @@ export const Navbar: React.FC = () => {
             className="Navbar__icons-count"
             style={{ display: cartItems.length ? '' : 'none' }}
           >
-            <span className="Navbar__icons-text">{cartItems.length}</span>
+            <span className="Navbar__icons-text">{qntOfItemsInCart}</span>
           </div>
         </Link>
       </div>
