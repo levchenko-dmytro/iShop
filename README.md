@@ -1,10 +1,16 @@
-# React TypeScript Starter Pack
+# A brief description of the project:
+  This is phone catalog of Apple products.
 
-To use this template click `Use this template`
+# Technologies that were used:
+  For creating this PR such technologies were used as: React, Sass.
 
-### Available Scripts
+# Link to the preview:
+  - [DEMO LINK](https://levchenko-dmytro.github.io/phone-catalog)
 
-`Deploy` - available to deploy your application to gh-pages
+# Link to the mockup:
+  - [figma design](https://www.figma.com/file/uEetgWenSRxk9jgiym6Yzp/Phone-catalog-redesign?node-id=1%3A2)
 
-`SCSS Preprocessor` - available to write your styles with modern style language
-
+# Any additional launch instructions:
+  - PR requires node version 14
+  - 'npm i' to install node_modules
+  - 'npm start' to open PR in browser
