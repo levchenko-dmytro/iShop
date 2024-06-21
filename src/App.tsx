@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
-
-interface Props {
-  onClick: () => void;
-  children: React.ReactNode;
-}
-
-export const Provider: React.FC<Props> = React.memo(({ onClick, children }) => (
-  <button type="button" onClick={onClick}>
-    {children}
-  </button>
-));
+import { Outlet, useLocation } from 'react-router-dom';
+import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
+import { BreadCrumbs } from './components/BreadCrumbs';
 
 export const App: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, [pathname]);
+
+  const isVisible = pathname
+    .split('/')
+    .filter(item => item !== '')
+    .some(item => item !== 'cart');
+
   return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>TodoList</Provider>
+    <div className="App">
+      <header className="header">
+        <Navbar />
+
+        {isVisible && (
+          <div className="wrapper">
+            <div className="container">
+              <BreadCrumbs />
+            </div>
+          </div>
+        )}
+      </header>
+
+      <div className="wrapper">
+        <div className="container main">
+          <Outlet />
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 };
