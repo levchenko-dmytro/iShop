@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './App.scss';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BreadCrumbs } from './components/BreadCrumbs';
+import { DropDownMenu } from './components/DropDownMenu';
+import classNames from 'classnames';
+import { GlobalContext } from './GlobalContext';
 
 export const App: React.FC = () => {
   const { pathname } = useLocation();
@@ -19,22 +22,19 @@ export const App: React.FC = () => {
     .filter(item => item !== '')
     .some(item => item !== 'cart');
 
+  const { isVisibleMenu } = useContext(GlobalContext);
+
   return (
-    <div className="App">
+    <div className="App" style={{ overflow: isVisibleMenu ? 'hidden' : '' }}>
       <header className="header">
         <Navbar />
 
-        {isVisible && (
-          <div className="wrapper">
-            <div className="container">
-              <BreadCrumbs />
-            </div>
-          </div>
-        )}
+        <DropDownMenu />
       </header>
 
       <div className="wrapper">
-        <div className="container main">
+        <div className={classNames('main', { container: '/' !== pathname })}>
+          {isVisible && <BreadCrumbs />}
           <Outlet />
         </div>
       </div>

@@ -1,5 +1,6 @@
 @import '../../utils/variables';
 @import '../../utils/typography';
+@import '../../utils/mixins';
 
 .HomePage {
   display: flex;
@@ -7,10 +8,15 @@
   row-gap: 80px;
 }
 
+.ShopByCategories {
+  margin: 0 auto;
+}
+
 .banner {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
 
   &__container {
     display: flex;
@@ -20,23 +26,22 @@
     margin-bottom: 8px;
   }
 
-  &__img-container {
-    height: 400px;
-    width: 1040px;
-    overflow: hidden;
-  }
-
   &__img-wrapper {
     display: flex;
   }
 
+  &__img-container {
+    height: 320px;
+    overflow: hidden;
+  }
+
   &__img {
-    width: 1040px;
-    height: 400px;
+    height: 320px;
     object-fit: cover;
   }
 
   &__button {
+    display: none;
     background-color: #fff;
     border: 1px solid $gray-icons-placeholders;
     cursor: pointer;
@@ -44,6 +49,48 @@
 
     &:hover {
       border-color: $gray-primary;
+    }
+  }
+}
+
+@include onTablet {
+  .ShopByCategories {
+    margin: 0;
+  }
+
+  .banner {
+    margin-inline: auto;
+
+    &__img-container {
+      height: 189px;
+      overflow: hidden;
+    }
+
+    &__img {
+      height: 189px;
+      object-fit: cover;
+    }
+
+    &__button {
+      display: block;
+    }
+  }
+}
+
+@include onDesktop {
+  .banner {
+    &__img-container {
+      height: 400px;
+      overflow: hidden;
+    }
+
+    &__img {
+      height: 400px;
+      object-fit: cover;
+    }
+
+    &__button {
+      display: block;
     }
   }
 }

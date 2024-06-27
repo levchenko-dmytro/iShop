@@ -1,9 +1,12 @@
 @import '../../utils/typography';
 @import '../../utils/variables';
+@import '../../utils/mixins';
 
 .BreadCrumbs {
   display: flex;
   column-gap: 8px;
+  margin-bottom: 24px;
+  align-items: start;
 
   &__item {
     display: flex;
@@ -29,6 +32,7 @@
     }
 
     &--current {
+      padding-top: 1.5px;
       color: $gray-secondary;
       cursor: default;
     }
@@ -41,5 +45,11 @@
     background-repeat: no-repeat;
     background-position: center, right;
     background-size: contain;
+  }
+}
+
+@include onTablet {
+  .BreadCrumbs {
+    margin-bottom: 40px;
   }
 }

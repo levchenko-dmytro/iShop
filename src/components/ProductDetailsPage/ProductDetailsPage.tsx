@@ -76,9 +76,15 @@ export const ProductDetailsPage: React.FC = () => {
             <div className="ProductDetailsPage__top-center">
               <div className="ProductDetailsPage__top-center-wrapper">
                 <div className="ProductDetailsPage__top-center-content">
-                  <p className="ProductDetailsPage__small-text">
-                    Available colors
-                  </p>
+                  <div className="ProductDetailsPage__available-colors-title">
+                    <p className="ProductDetailsPage__small-text">
+                      Available colors
+                    </p>
+
+                    <p className="ProductDetailsPage__id-name-in-colors">
+                      {`ID: ${itemId}`}
+                    </p>
+                  </div>
 
                   <AvailableColors
                     colorsAvailable={productDetails.colorsAvailable}
@@ -198,12 +204,7 @@ export const ProductDetailsPage: React.FC = () => {
               </span>
             </div>
 
-            <div
-              style={{
-                gridColumn: 'span 24',
-                height: '80px',
-              }}
-            />
+            <div className="deviding-block" />
 
             <div className="ProductDetailsPage__about">
               <h2 className="ProductDetailsPage__subtitle">About</h2>
@@ -212,6 +213,8 @@ export const ProductDetailsPage: React.FC = () => {
 
               <AboutProduct description={productDetails.description} />
             </div>
+
+            <div className="deviding-block deviding-block--onDesktop" />
 
             <div className="ProductDetailsPage__tech-specs">
               <h2 className="ProductDetailsPage__subtitle">Tech specs</h2>

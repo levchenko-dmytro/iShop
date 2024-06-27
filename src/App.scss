@@ -1,6 +1,7 @@
 @import "./utils/fonts";
 @import "./utils/typography";
 @import "./utils/variables";
+@import "./utils/mixins";
 
 * {
   font-family: Mont, sans-serif;
@@ -45,9 +46,13 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  min-width: 320px;
 }
 
 .header {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   row-gap: 24px;
@@ -55,14 +60,33 @@ body {
 }
 
 .wrapper {
-  margin: 0 auto;
+  margin-top: 88px;
+  margin-inline: auto;
 }
 
 .container {
-  min-width: 1440px;
-  padding-inline: 152px;
+  padding-inline: 16px;
 }
 
 .main {
   margin-bottom: 80px;
+}
+
+@include onTablet {
+  .App {
+    margin: 0 auto;
+  }
+  .wrapper {
+    margin-top: 104px;
+  }
+  .container {
+    padding-inline: 24px;
+    min-width: 640px;
+  }
+}
+@include onDesktop {
+  .container {
+    padding-inline: 32px;
+    width: 1200px;
+  }
 }

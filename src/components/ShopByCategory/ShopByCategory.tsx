@@ -12,19 +12,15 @@ export const ShopByCategory = () => {
 
       <ul data-cy="categoryLinksContainer" className="categories">
         {categoriesList.map(category => {
-          const { title, name, img, color, qnt } = category;
+          const { title, name, img, qnt } = category;
 
           return (
             <li className="categories__item" key={title}>
               <Link to={`/${name}`} className="categories__link">
                 <div
                   className="categories__wrapper-img"
-                  style={{
-                    backgroundColor: color,
-                  }}
-                >
-                  <img src={img} alt={name} className="categories__img" />
-                </div>
+                  style={{ backgroundImage: `url(${img})` }}
+                />
 
                 <h3 className="categories__title">{title}</h3>
 

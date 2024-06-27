@@ -62,24 +62,27 @@ export const CartItems: React.FC = () => {
             </Link>
           </div>
 
-          <div className="CartItems__buttons-container">
-            <button
-              type="button"
-              className="CartItems__button"
-              disabled={item.quantity === 1}
-              onClick={() => handleChangeQnt('minus', item.id)}
-            />
-            <div className="CartItems__quantity">
-              <span>{item.quantity}</span>
+          <div className="CartItems__right-part">
+            <div className="CartItems__buttons-container">
+              <button
+                type="button"
+                className="CartItems__button"
+                disabled={item.quantity === 1}
+                onClick={() => handleChangeQnt('minus', item.id)}
+              />
+              <div className="CartItems__quantity">
+                <span>{item.quantity}</span>
+              </div>
+              <button
+                type="button"
+                className="CartItems__button CartItems__button--add"
+                onClick={() => handleChangeQnt('plus', item.id)}
+              />
             </div>
-            <button
-              type="button"
-              className="CartItems__button CartItems__button--add"
-              onClick={() => handleChangeQnt('plus', item.id)}
-            />
+            <div className="CartItems__price-wrapper">
+              <span className="CartItems__price">{item.product.price}</span>
+            </div>
           </div>
-
-          <span className="CartItems__price">{item.product.price}</span>
         </li>
       ))}
     </ul>

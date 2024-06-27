@@ -1,23 +1,27 @@
 @import "../../utils/typography";
 @import "../../utils/variables";
+@import "../../utils/mixins";
 
 .Navbar {
   display: flex;
   justify-content: space-between;
+  position: relative;
+  z-index: 11;
+  background-color: #fff;
 
   box-shadow: 0 1px 0 0 $gray-elements;
 
   &__left {
     display: flex;
-    column-gap: 64px;
     align-items: center;
+    column-gap: 64px;
     padding-left: 24px;
   }
 
   &__list {
-    display: flex;
+    display: none;
     align-items: center;
-    column-gap: 64px;
+    column-gap: 16px;
     margin: 0;
     padding: 0;
   }
@@ -72,10 +76,10 @@
 
   &__search-bar {
     display: flex;
-    width: 327px;
-    height: 64px;
+    height: 48px;
     justify-content: space-between;
-    padding-inline: 24px;
+    padding-inline: 8px;
+    margin-left: 16px;
     box-shadow: -1px 0 0 0 $gray-elements;
     align-items: center;
   }
@@ -84,6 +88,7 @@
     border: none;
     outline: none;
     color: $gray-primary;
+    width: 100%;
 
     @extend %text-buttons;
 
@@ -94,65 +99,60 @@
     }
   }
 
-  &__link-icons {
-    display: flex;
-    position: relative;
-    height: 64px;
-    width: 64px;
-    background-repeat: no-repeat;
-    background-position: center;
-    box-shadow: -1px 0 0 0 $gray-elements;
+  &__CartAndFavourites {
+    display: none;
+  }
+}
 
-    &::after {
-      position: absolute;
-      content: '';
-      height: 3px;
-      width: 100%;
-      bottom: 0;
-      background-color: $gray-primary;
+.button-burger {
+  border: 0;
+  height: 48px;
+  width: 48px;
+  padding: 0;
+  background-color: transparent;
+}
 
-      transform: scale(0);
-      transition: transform $duration;
+@include onTablet {
+  .Navbar {
+    &__left {
+      column-gap: 32px;
+      padding-left: 16px;
     }
 
-    &:hover::after {
-      transform: scale(1);
+    &__list {
+      display: flex;
     }
 
-    &--active::after {
-      transform: scale(1);
+    &__CartAndFavourites {
+      display: block;
+    }
+
+    &__search-bar {
+      height: 64px;
     }
   }
 
-  &__heart {
-    background-image: url(../../../public/img/icons/heart.svg);
+  .button-burger {
+    display: none;
   }
+}
 
-  &__cart {
-    box-shadow: 0 0 0 1px $gray-elements;
-    background-image: url(../../../public/img/icons/basket.svg);
+@media screen and (min-width: 748px) {
+  .Navbar__list {
+    column-gap: 32px;
+    width: 224px;
   }
+}
 
-  &__icons-count {
-    display: flex;
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    content: '';
-    top: 25%;
-    right: 25%;
-    width: 14px;
-    height: 14px;
-    background-image: url(../../../public/img/icons/red-dot.svg);
+@include onDesktop {
+  .Navbar {
+    &__list {
+      column-gap: 64px;
+    }
 
-    transform: translate(-25%, 25%);
-  }
-
-  &__icons-text {
-    color: $gray-white;
-    font-size: 9px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+    &__search-bar {
+      width: 327px;
+      padding-inline: 24px;
+    }
   }
 }

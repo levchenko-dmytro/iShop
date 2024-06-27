@@ -1,18 +1,19 @@
 @import "../../utils/typography";
 @import "../../utils/variables";
+@import "../../utils/mixins";
 
 .ProductDetailsPage {
   display: grid;
-  grid-template-columns: repeat(24, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   column-gap: 16px;
-  margin-bottom: 80px;
+  margin-bottom: 56px;
 
   &__title {
-    grid-column: span 24;
-    margin-bottom: 40px;
+    grid-column: 1 / -1;
+    margin-bottom: 32px;
     color: $gray-primary;
 
-    @extend %h1;
+    @extend %mobile-h2;
 
     &--error {
       color: $gray-secondary;
@@ -20,7 +21,7 @@
   }
 
   &__top-center {
-    grid-column: 14 / 21;
+    grid-column: 1 / -1;
   }
 
   &__top-center-wrapper {
@@ -74,7 +75,7 @@
   &__price {
     color: $gray-primary;
 
-    @extend %h1;
+    @extend %h2;
 
     &::before {
       content: '\0024';
@@ -107,9 +108,15 @@
     @extend %text-small;
   }
 
-  &__top-right {
-    grid-column: -1 / -3;
-    justify-self: end;
+  &__available-colors-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__id-name-in-colors {
+    color: $gray-icons-placeholders;
+
+    @extend %text-small;
   }
 
   &__id-name {
@@ -118,8 +125,12 @@
     @extend %text-small;
   }
 
+  &__top-right {
+    display: none;
+  }
+
   &__about {
-    grid-column: 1 / 13;
+    grid-column: 1 / -1;
   }
 
   &__subtitle {
@@ -127,10 +138,76 @@
 
     color: $gray-primary;
 
-    @extend %h2;
+    @extend %mobile-h3;
   }
 
   &__tech-specs {
-    grid-column: 14 / 25;
+    grid-column: 1 / -1;
+  }
+}
+
+.deviding-block {
+  grid-column: 1 / -1;
+  height: 56px;
+}
+
+@include onTablet {
+  .ProductDetailsPage {
+    grid-template-columns: repeat(12, 1fr);
+    width: 640px;
+    margin-inline: auto;
+    margin-bottom: 64px;
+
+    &__title {
+      margin-bottom: 40px;
+    }
+
+    &__top-center {
+      grid-column: 8 / 13;
+    }
+  }
+
+  .deviding-block {
+    height: 64px;
+  }
+}
+
+@include onDesktop {
+  .ProductDetailsPage {
+    grid-template-columns: repeat(24, 1fr);
+    margin-bottom: 80px;
+    width: 1200px;
+
+    &__top-center {
+      grid-column: 14 / 21;
+    }
+
+    &__id-name-in-colors {
+      display: none;
+    }
+
+    &__top-right {
+      display: block;
+      grid-column: -1 / -3;
+      justify-self: end;
+    }
+
+   
+
+    &__about {
+      grid-column: 1 / 13;
+    }
+
+    &__tech-specs {
+      grid-column: 14 / 25;
+    }
+  }
+
+  .deviding-block {
+    height: 80px;
+
+    &--onDesktop {
+      display: none;
+    }
   }
 }

@@ -1,5 +1,6 @@
 @import "../../utils/typography";
 @import "../../utils//variables";
+@import "../../utils/mixins";
 
 .categories-title {
   color: $gray-primary;
@@ -10,7 +11,8 @@
 
 .categories {
   display: flex;
-  column-gap: 16px;
+  flex-direction: column;
+  row-gap: 32px;
 
   &__item {
     transition: $duration;
@@ -22,15 +24,9 @@
 
   &__wrapper-img {
     position: relative;
-    width: 368px;
-    height: 368px;
     margin-bottom: 24px;
-  }
-
-  &__img {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    width: 100%;
+    height: 288px
   }
 
   &__title {
@@ -45,3 +41,23 @@
     @extend %body-text;
   }
 }
+
+@include onTablet {
+  .categories {
+    flex-direction: row;
+    column-gap: 16px;
+
+    &__wrapper-img {
+      height: 187px;
+      width: 187px;
+    }
+  }
+}
+
+@include onDesktop {
+  .categories__wrapper-img {
+    height: 368px;
+    width: 368px;
+  }
+}
+

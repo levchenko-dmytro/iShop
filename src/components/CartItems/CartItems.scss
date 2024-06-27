@@ -1,38 +1,37 @@
 @import '../../utils/typography';
 @import '../../utils/variables';
+@import '../../utils/mixins';
 
 .CartItems {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
 
-
   &__item {
-    padding: 24px;
+    padding: 16px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    row-gap: 16px;
     align-items: center;
     border: 1px solid $gray-elements;
   }
 
   &__left-part {
     display: flex;
-    column-gap: 24px;
+    column-gap: 16px;
     align-items: center;
   }
 
   &__link {
     display: flex;
     align-items: center;
-    column-gap: 24px;
+    column-gap: 16px;
     transition: all $duration;
 
     &:hover {
       text-decoration: underline;
     }
   }
-
-
 
   &__img-container {
     height: 80px;
@@ -61,13 +60,19 @@
   }
 
   &__name-wrapper {
-    width: 295px;
+    width: 128px;
   }
 
   &__name {
     color: $gray-primary;
 
     @extend %body-text;
+  }
+
+  &__right-part {
+    display: flex; 
+    justify-content: space-between;
+    width: 100%;
   }
 
   &__buttons-container {
@@ -108,13 +113,63 @@
     width: 32px;
   }
 
+  &__price-wrapper {
+    display: flex;
+    justify-content: end;
+    width: 80px;
+  }
+
   &__price {
     color: $gray-primary;
 
-    @extend %h2;
+    @extend %h3;
 
     &::before {
       content: '\0024';
+    }
+  }
+}
+
+@include onTablet {
+  .CartItems {
+    row-gap: 32px;
+
+    &__item {
+      flex-direction: row;
+      row-gap: 0;
+      justify-content: space-between;
+      padding: 24px;
+    }
+
+    &__left-part {
+      column-gap: 24px;
+    }
+
+    &__link {
+      column-gap: 24px;
+    }
+
+    &__name-wrapper {
+      width: 172px;
+    }
+
+    &__right-part {
+      width: auto;
+      column-gap: 24px;
+    }
+  }
+}
+
+@include onDesktop {
+  .CartItems {
+    row-gap: 16px;
+
+    &__item {
+      padding: 24px;
+    }
+
+    &__name-wrapper {
+      width: 295px;
     }
   }
 }

@@ -1,5 +1,6 @@
 @import '../../utils/typography';
 @import '../../utils/variables';
+@import '../../utils/mixins';
 
 .Products {
   display: flex;
@@ -74,7 +75,19 @@
     margin-top: -16px;
 
     display: grid;
-    grid-template-columns: repeat(24, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 40px 16px;
+  }
+}
+
+@include onTablet {
+  .Products__list {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+@include onDesktop {
+  .Products__list {
+    grid-template-columns: repeat(24, 1fr);
   }
 }

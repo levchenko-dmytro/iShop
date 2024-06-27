@@ -1,8 +1,8 @@
 @import '../../utils/typography';
 @import '../../utils/variables';
+@import '../../utils/mixins';
 
 .ProductsSlider {
-  width: $design-width;
   overflow: hidden;
 
   &__container {
@@ -24,7 +24,7 @@
   &__title {
     color: $gray-primary;
     
-    @extend %h1;
+    @extend %mobile-h2;
   }
 
   &__buttons {
@@ -64,5 +64,20 @@
       }
     }
   }
+
+  &__card-container {
+    width: 212px;
+  }
 }
 
+@include onTablet {
+  .ProductsSlider__card-container {
+    width: 237px;
+  }
+}
+
+@include onDesktop {
+  .ProductsSlider__card-container {
+    width: 272px;
+  }
+}

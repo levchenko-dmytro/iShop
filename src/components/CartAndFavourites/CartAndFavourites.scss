@@ -1,0 +1,67 @@
+@import '../../utils/variables';
+
+.CartAndFavourites {
+  display: flex;
+  height: 64px;
+  border: 1px solid $gray-elements;
+
+  &__link-icons {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &::after {
+      position: absolute;
+      content: '';
+      height: 3px;
+      width: 100%;
+      bottom: 0;
+      background-color: $gray-primary;
+
+      transform: scale(0);
+      transition: transform $duration;
+    }
+
+    &:hover::after {
+      transform: scale(1);
+    }
+
+    &--active::after {
+      transform: scale(1);
+    }
+  }
+
+  &__heart {
+    background-image: url('../../../public/img/icons/heart.svg');
+  }
+
+  &__cart {
+    border-left: 1px solid $gray-elements;
+    background-image: url(../../../public/img/icons/basket.svg);
+  }
+
+  &__icons-count {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    content: '';
+    top: 50%;
+    right: 50%;
+    width: 14px;
+    height: 14px;
+    background-image: url(../../../public/img/icons/red-dot.svg);
+
+    transform: translate(100%, -75%);
+  }
+
+  &__icons-text {
+    color: $gray-white;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}

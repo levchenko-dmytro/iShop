@@ -4,6 +4,7 @@ import { Product } from './types/Product';
 import { getProducts } from './api/products';
 import { Category } from './types/Category';
 import { Cart } from './types/Cart';
+import useWindowDimensions from './hooks/useWindowDimensions';
 
 type GlobalProps = {
   productsList: Product[];
@@ -15,6 +16,8 @@ type GlobalProps = {
   categoriesList: Category[];
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
+  isVisibleMenu: boolean;
+  setIsVisibleMenu: (val: boolean) => void;
 };
 
 export const GlobalContext = createContext<GlobalProps>({
@@ -27,6 +30,8 @@ export const GlobalContext = createContext<GlobalProps>({
   categoriesList: [],
   isLoading: false,
   setIsLoading: () => {},
+  isVisibleMenu: false,
+  setIsVisibleMenu: () => {},
 });
 
 type Props = {
@@ -45,6 +50,8 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [isVisibleMenu, setIsVisibleMenu] = useState(false);
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -58,24 +65,28 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     return productsList.filter(item => item.category === type).length;
   };
 
+  const { pictureWidth } = useWindowDimensions();
+
+  const path = pictureWidth === 490 ? 'tablet' : 'desktop';
+
   const categoriesList = [
     {
       title: 'Mobile phones',
-      img: 'img/Shop-by-category/phones.png',
+      img: `img/Shop-by-category/${path}/mobiles.png`,
       color: '#fcdbc1',
       name: 'phones',
       qnt: getQntOfproducts('phones'),
     },
     {
       title: 'Tablets',
-      img: 'img/Shop-by-category/tabs.png',
+      img: `img/Shop-by-category/${path}/tabs.png`,
       color: '#8d8d92',
       name: 'tablets',
       qnt: getQntOfproducts('tablets'),
     },
     {
       title: 'Accessories',
-      img: 'img/Shop-by-category/accessories.png',
+      img: `img/Shop-by-category/${path}/accessories.png`,
       color: '#973d5f',
       name: 'accessories',
       qnt: getQntOfproducts('accessories'),
@@ -94,6 +105,8 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
         categoriesList,
         isLoading,
         setIsLoading,
+        isVisibleMenu,
+        setIsVisibleMenu,
       }}
     >
       {children}

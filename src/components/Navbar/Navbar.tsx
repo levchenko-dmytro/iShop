@@ -1,24 +1,20 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useContext } from 'react';
-import { Link, NavLink, useLocation, useSearchParams } from 'react-router-dom';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 
 import './Navbar.scss';
 import classNames from 'classnames';
-import { GlobalContext } from '../../GlobalContext';
 import { Logo } from '../Logo';
 import { SearchParams, getSearchWith } from '../../services/searchHelper';
+import { CartAndFavourites } from '../CartAndFavourites';
+import { GlobalContext } from '../../GlobalContext';
 
 const getActiveClass = ({ isActive }: { isActive: boolean }) =>
   classNames('Navbar__link', { 'Navbar__link--active': isActive });
 
-export const Navbar: React.FC = () => {
+export const Navbar = () => {
   const { pathname } = useLocation();
-  const { favouriteItems, cartItems } = useContext(GlobalContext);
-
-  const qntOfItemsInCart = cartItems.reduce(
-    (acc, item) => acc + item.quantity,
-    0,
-  );
+  const { isVisibleMenu, setIsVisibleMenu } = useContext(GlobalContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') || '';
@@ -85,7 +81,7 @@ export const Navbar: React.FC = () => {
             }}
           >
             <input
-              placeholder={`Search in ${searchIn}...`}
+              placeholder={`Search...`}
               className="Navbar__search"
               value={query}
               onChange={handleSearch}
@@ -121,33 +117,19 @@ export const Navbar: React.FC = () => {
           </div>
         )}
 
-        <Link
-          to="/favourites"
-          className={classNames('Navbar__heart Navbar__link-icons', {
-            'Navbar__link-icons--active': pathname === '/favourites',
-          })}
-        >
-          <div
-            className="Navbar__icons-count"
-            style={{ display: favouriteItems.length ? '' : 'none' }}
-          >
-            <span className="Navbar__icons-text">{favouriteItems.length}</span>
-          </div>
-        </Link>
+        <div className="Navbar__CartAndFavourites">
+          <CartAndFavourites width={'128px'} />
+        </div>
 
-        <Link
-          to="/cart"
-          className={classNames('Navbar__cart Navbar__link-icons', {
-            'Navbar__link-icons--active': pathname === '/cart',
-          })}
-        >
-          <div
-            className="Navbar__icons-count"
-            style={{ display: cartItems.length ? '' : 'none' }}
-          >
-            <span className="Navbar__icons-text">{qntOfItemsInCart}</span>
-          </div>
-        </Link>
+        <button
+          className="button-burger"
+          onClick={() => setIsVisibleMenu(!isVisibleMenu)}
+          style={{
+            backgroundImage: !isVisibleMenu
+              ? 'url(./img/icons/burger_menu.svg)'
+              : 'url(./img/icons/burger_menu_close.svg)',
+          }}
+        />
       </div>
     </nav>
   );

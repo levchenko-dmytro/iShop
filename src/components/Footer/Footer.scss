@@ -1,20 +1,26 @@
 @import "../../utils/typography";
 @import "../../utils/variables";
+@import "../../utils/mixins";
 
 .footer {
   box-shadow: 0 -1px 0 0 #E2E6E9;
   margin-top: auto;
+  padding-block: 32px;
 
   &__container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 96px;
+    flex-direction: column;
+    row-gap: 32px;
+    width: 320px;
+    
+    margin-inline: auto;
   }
 
   &__links {
     display: flex;
-    column-gap: 64px;
+    column-gap: 24px;
+    align-self: end;
+    margin-top: -54px;
   }
 
   &__link {
@@ -33,6 +39,8 @@
   display: flex;
   align-items: center;
   column-gap: 16px;
+  margin-right: 85px;
+  align-self: end;
 
   &__button {
     position: relative;
@@ -50,23 +58,68 @@
       border-color: $gray-primary;
     }
   }
-
+  
   &__text {
-    position: absolute;
+    @extend %text-small;
+    
+    color: $gray-secondary;
     width: max-content;
+    position: absolute;
     padding-right: 16px;
     top: 50%;
     right: 100%;
-    color: $gray-secondary;
     transition: all $duration;
-    transform: translate(50%, -50%);
-    opacity: 0;
+    transform: translate(0, -50%);
+  }
+}
 
-    @extend %text-small;
+@include onTablet {
+  .footer {
+    &__container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 640px;
+    }
 
-    &:hover {
-      transform: translate(0, -50%);
-      opacity: 1;
+    &__links {
+      justify-content: space-between;
+      align-self: auto;
+      margin-top: 0;
+      width: 192px;
+    }
+  }
+
+  .back-to-top {
+    margin-right: 0;
+    margin-left: 86px;
+    align-self: auto;
+  }
+}
+
+@include onDesktop {
+  .footer {
+    &__container {
+      width: 1200px;
+    }
+
+    &__links {
+      width: 379px;
+    }
+  }
+
+  .back-to-top {
+    margin-left: 0;
+    
+    &__text {
+      opacity: 0;
+      transform: translate(50%, -50%);
+
+
+      &:hover {
+        transform: translate(0, -50%);
+        opacity: 1;
+      }
     }
   }
 }

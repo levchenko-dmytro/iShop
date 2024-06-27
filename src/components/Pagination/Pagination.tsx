@@ -4,8 +4,9 @@ import React from 'react';
 import './Pagination.scss';
 import { Link, useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { getNumbers } from '../../services/getNumbers';
+import { getPaginationRange } from '../../services/getPaginationRange';
 import { getSearchWith } from '../../services/searchHelper';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 type Props = {
   total: number;
@@ -14,10 +15,10 @@ type Props = {
 
 export const Pagination: React.FC<Props> = ({ total, perPage }) => {
   const [searchParams] = useSearchParams();
+  const { screenWidth } = useWindowDimensions();
   const lastPage = Math.ceil(total / perPage);
-  const pages = getNumbers(1, lastPage).map(n => `${n}`);
-
   const pageNumber = +(searchParams.get('page') || 1);
+  const pages = getPaginationRange(lastPage, pageNumber, 1, screenWidth);
 
   const handlePageChande = (mode: string) => {
     if (mode === 'prev' && pageNumber > 1) {
@@ -28,7 +29,15 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
       return getSearchWith({ page: `${pageNumber + 1}` }, searchParams);
     }
 
-    return '';
+    if (mode === '... ') {
+      return getSearchWith({ page: '3' }, searchParams);
+    }
+
+    if (mode === ' ...') {
+      return getSearchWith({ page: `${lastPage - 3}` }, searchParams);
+    }
+
+    return getSearchWith({ page: mode }, searchParams);
   };
 
   return (
@@ -62,7 +71,7 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
                 isSelected ? 'pagination__link--active' : '',
               )}
               to={{
-                search: getSearchWith({ page: p }, searchParams),
+                search: handlePageChande(p),
               }}
             >
               {p}

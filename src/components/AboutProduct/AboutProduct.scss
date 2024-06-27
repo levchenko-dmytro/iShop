@@ -10,7 +10,7 @@
     margin-bottom: 16px;
     color: $gray-primary;
 
-    @extend %h3;
+    @extend %mobile-h4;
   }
 
   &__article-paragraph {
