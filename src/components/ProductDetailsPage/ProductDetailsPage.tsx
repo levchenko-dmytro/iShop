@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import './ProductDetailsPage.scss';
 import classNames from 'classnames';
-import { Link, useParams } from 'react-router-dom';
-import { getProductDetails } from '../../api/products';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { getProductsDeatailsList } from '../../api/products';
 import { ProductDetails } from '../../types/ProductDetails';
 import { Buttons } from '../Buttons';
 import { ProductPictures } from '../ProductPictures';
@@ -23,6 +23,24 @@ export const ProductDetailsPage: React.FC = () => {
   const [productDetails, setProductDetails] = useState<ProductDetails | null>(
     null,
   );
+  const { pathname } = useLocation();
+  const category = pathname.slice(1).split('/')[0];
+
+  const loadProducts = useCallback(async () => {
+    try {
+      const productsDeatailsList = await getProductsDeatailsList(category);
+
+      const product = productsDeatailsList.find(item => item.id === productId);
+
+      if (product) {
+        setProductDetails(product);
+      }
+    } catch (error) {
+      setErrorMsg('Phone was not found');
+    }
+
+    setIsLoading(false);
+  }, [category, productId, setIsLoading]);
 
   useEffect(() => {
     if (!productId) {
@@ -32,18 +50,28 @@ export const ProductDetailsPage: React.FC = () => {
     setIsLoading(true);
     setErrorMsg('');
 
-    if (productId) {
-      getProductDetails(productId)
-        .then(setProductDetails)
-        .catch(() => setErrorMsg('Phone was not found'))
-        .finally(() => setIsLoading(false));
-    }
-  }, [productId, setIsLoading, setErrorMsg]);
+    loadProducts();
+  }, [loadProducts, productId, setIsLoading]);
 
-  const itemId =
-    productsList
-      .find(item => item.itemId === productDetails?.id)
-      ?.id.padStart(6, '0') || '0';
+  const getItemId = () => {
+    let prodId = '000000';
+
+    if (productDetails) {
+      prodId =
+        productsList.find(item => item.itemId === productDetails.id)?.id ||
+        '000000';
+    }
+
+    const length = 6 - String(prodId).length;
+
+    if (length > 0) {
+      for (let i = 0; i < length; i++) {
+        prodId = '0' + prodId;
+      }
+    }
+
+    return prodId;
+  };
 
   const mayAlsoLikeList = productsList.filter(item =>
     productDetails ? item.itemId.includes(productDetails.namespaceId) : [],
@@ -82,7 +110,7 @@ export const ProductDetailsPage: React.FC = () => {
                     </p>
 
                     <p className="ProductDetailsPage__id-name-in-colors">
-                      {`ID: ${itemId}`}
+                      {`ID: ${getItemId()}`}
                     </p>
                   </div>
 
@@ -200,7 +228,7 @@ export const ProductDetailsPage: React.FC = () => {
 
             <div className="ProductDetailsPage__top-right">
               <span className="ProductDetailsPage__id-name">
-                {`ID: ${itemId}`}
+                {`ID: ${getItemId()}`}
               </span>
             </div>
 

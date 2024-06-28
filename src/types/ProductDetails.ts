@@ -1,5 +1,6 @@
 export type ProductDetails = {
   id: string;
+  category: string;
   namespaceId: string;
   name: string;
   capacityAvailable: string[];

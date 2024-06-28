@@ -16,7 +16,7 @@
   &__title {
     color: $gray-primary;
 
-    @extend %h1;
+    @extend %mobile-h1;
   }
 
   &__text {

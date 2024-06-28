@@ -55,7 +55,7 @@
   &__price {
     color: $gray-primary;
 
-    @extend %h2;
+    @extend %h3;
 
     &--full {
       color: $gray-secondary;

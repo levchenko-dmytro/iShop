@@ -1,4 +1,5 @@
-const BASE_URL = 'https://mate-academy.github.io/react_phone-catalog/_new';
+const BASE_URL =
+  'https://levchenko-dmytro.github.io/phone-catalog/updated_data/api';
 
 function wait(delay: number) {
   return new Promise(resolve => setTimeout(resolve, delay));

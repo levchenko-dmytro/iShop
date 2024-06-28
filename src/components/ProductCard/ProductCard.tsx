@@ -10,7 +10,7 @@ type Props = {
 };
 
 const imageLinkPart =
-  'https://mate-academy.github.io/react_phone-catalog/_new/';
+  'https://levchenko-dmytro.github.io/phone-catalog/updated_data/';
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
   const [searchParams] = useSearchParams();
