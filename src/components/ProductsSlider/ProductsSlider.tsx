@@ -30,10 +30,10 @@ export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
   }, [CARDS_QNT, screenWidth]);
 
   const slideCards = (slideTo: string) => {
-    if (slideTo === 'next') {
-      setSlideIndex(slideIndex !== endPosition ? slideIndex + 1 : 0);
-    } else if (slideTo === 'prev') {
-      setSlideIndex(slideIndex !== 0 ? slideIndex - 1 : endPosition);
+    if (slideTo === 'next' && slideIndex < endPosition) {
+      setSlideIndex(slideIndex + 1);
+    } else if (slideTo === 'prev' && slideIndex > 0) {
+      setSlideIndex(slideIndex - 1);
     }
   };
 
