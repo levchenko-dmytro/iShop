@@ -16,7 +16,9 @@ export function getPaginationRange(
 ): string[] {
   if (screenWidth < 640) {
     if (page > 1) {
-      return getNumbers(page - 1, page + 2);
+      const lastPage = Math.min(page + 2, totalPages);
+
+      return getNumbers(page - 1, lastPage);
     }
 
     return getNumbers(page, page + 3);

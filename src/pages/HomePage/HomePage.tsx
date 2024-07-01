@@ -23,7 +23,7 @@ export const HomePage = () => {
     <div className="HomePage">
       <Banner />
 
-      <div className="hot-prices container">
+      <div className="hot-prices">
         <ProductsSlider products={hotProducts} title="Hot prices" />
       </div>
 
@@ -31,7 +31,7 @@ export const HomePage = () => {
         <ShopByCategory />
       </div>
 
-      <div className="BrandNewModels container">
+      <div className="BrandNewModels">
         <ProductsSlider products={newProducts} title="Brand new models" />
       </div>
     </div>

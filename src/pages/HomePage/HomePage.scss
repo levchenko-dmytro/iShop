@@ -13,30 +13,33 @@
 }
 
 .banner {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  row-gap: 16px;
   align-items: center;
-  margin: 0 auto;
 
   &__container {
     display: flex;
-    width: 100%;
-
     column-gap: 16px;
-    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  &__img-container {
+    display: flex;
+    width: 100%;
+    column-gap: 16px;
+    overflow: hidden;
   }
 
   &__img-wrapper {
     display: flex;
   }
-
-  &__img-container {
-    height: 320px;
-    overflow: hidden;
-  }
+  
 
   &__img {
     height: 320px;
+    width: 100%;
     object-fit: cover;
   }
 
@@ -46,51 +49,12 @@
     border: 1px solid $gray-icons-placeholders;
     cursor: pointer;
     transition: border-color .3s;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 32px;
 
     &:hover {
       border-color: $gray-primary;
-    }
-  }
-}
-
-@include onTablet {
-  .ShopByCategories {
-    margin: 0;
-  }
-
-  .banner {
-    margin-inline: auto;
-
-    &__img-container {
-      height: 189px;
-      overflow: hidden;
-    }
-
-    &__img {
-      height: 189px;
-      object-fit: cover;
-    }
-
-    &__button {
-      display: block;
-    }
-  }
-}
-
-@include onDesktop {
-  .banner {
-    &__img-container {
-      height: 400px;
-      overflow: hidden;
-    }
-
-    &__img {
-      height: 400px;
-      object-fit: cover;
-    }
-
-    &__button {
-      display: block;
     }
   }
 }
@@ -118,4 +82,59 @@
 
 .hot-prices {
   margin-top: -8px;
+  padding-left: 16px;
+}
+
+.BrandNewModels {
+  padding-left: 16px;
+}
+
+
+@include onTablet {
+  .ShopByCategories {
+    margin: 0;
+  }
+
+  .banner {
+    padding-inline: 24px;
+
+    &__img {
+      height: auto;
+    }
+    
+    &__button {
+      display: block;
+    }
+  }
+
+  .hot-prices {
+    margin-top: -8px;
+    padding-left: 24px;
+  }
+  
+  .BrandNewModels {
+    padding-left: 24px;
+  }
+}
+
+@include onDesktop {
+  .banner {
+    padding-inline: 32px;
+
+    &__img-container {
+      width: 1040px;
+    }
+
+    &__button {
+      display: block;
+    }
+  }
+
+  .hot-prices {
+    padding-inline: 32px;
+  }
+  
+  .BrandNewModels {
+    padding-inline: 32px;
+  }
 }

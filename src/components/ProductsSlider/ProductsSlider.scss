@@ -3,6 +3,8 @@
 @import '../../utils/mixins';
 
 .ProductsSlider {
+  --card-width: 213.6px;
+
   overflow: hidden;
 
   &__container {
@@ -19,6 +21,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 24px;
+    padding-right: 16px;
   }
 
   &__title {
@@ -65,19 +68,34 @@
     }
   }
 
+  &__wrapper {
+    width: var(--card-width);
+  }
+
   &__card-container {
-    width: 212px;
+    display: flex;
+    column-gap: 16px;
   }
 }
 
 @include onTablet {
-  .ProductsSlider__card-container {
-    width: 237px;
+  .ProductsSlider {
+    --card-width: 238.6px;
+
+    &__top {
+      padding-right: 24px;
+    }
   }
 }
 
 @include onDesktop {
-  .ProductsSlider__card-container {
-    width: 272px;
+  .ProductsSlider {
+    --card-width: 272px;
+
+    // padding-left: 32px;
+
+    &__top {
+      padding-right: 0;
+    }
   }
 }

@@ -40,6 +40,12 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
     return getSearchWith({ page: mode }, searchParams);
   };
 
+  const handleScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+    });
+  };
+
   return (
     <ul className="pagination">
       <li className="pagination__item">
@@ -51,6 +57,7 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
             pageNumber === 1 ? 'pagination__link--arrow-disabled' : '',
           )}
           to={{ search: handlePageChande('prev') }}
+          onClick={handleScrollTop}
         />
       </li>
       {pages.map(p => {
@@ -73,6 +80,7 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
               to={{
                 search: handlePageChande(p),
               }}
+              onClick={handleScrollTop}
             >
               {p}
             </Link>
@@ -89,6 +97,7 @@ export const Pagination: React.FC<Props> = ({ total, perPage }) => {
             pageNumber === lastPage ? 'pagination__link--arrow-disabled' : '',
           )}
           to={{ search: handlePageChande('next') }}
+          onClick={handleScrollTop}
         />
       </li>
     </ul>

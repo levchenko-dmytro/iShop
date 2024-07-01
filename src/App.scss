@@ -43,50 +43,66 @@ body {
 }
 
 .App {
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
-  min-width: 320px;
+  row-gap: 80px;
+
+  align-items: center;
+}
+
+.grid {
+  --grid-colums: 4;
+
+  display: grid;
+  grid-template-columns: repeat(var(--grid-colums), 1fr);
+  column-gap: 16px;
+
+  @include onTablet {
+    --grid-colums: 12;
+  }
+
+  @include onDesktop {
+    --grid-colums: 24;
+  }
 }
 
 .header {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   z-index: 1;
   display: flex;
   flex-direction: column;
   row-gap: 24px;
-  margin-bottom: 40px;
-}
-
-.wrapper {
-  margin-top: 88px;
-  margin-inline: auto;
 }
 
 .container {
   padding-inline: 16px;
+
+  @include onTablet {
+    padding-inline: 24px;
+  }
+
+  @include onDesktop {
+    padding-inline: 32px;
+    margin-inline: auto;
+  }
 }
+
 
 .main {
-  margin-bottom: 80px;
-}
+  padding-top: 88px;
+  width: 100%;
 
-@include onTablet {
-  .App {
-    margin: 0 auto;
+  @include onTablet {
+    padding-top: 104px;
   }
-  .wrapper {
-    margin-top: 104px;
-  }
-  .container {
-    padding-inline: 24px;
-    min-width: 640px;
-  }
-}
-@include onDesktop {
-  .container {
-    padding-inline: 32px;
+
+  @include onDesktop {
     width: 1200px;
   }
+}
+
+.footer {
+  width: 100%;
 }

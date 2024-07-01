@@ -10,7 +10,7 @@ export const CartPage = () => {
   const { cartItems } = useContext(GlobalContext);
 
   return (
-    <div className="CartPage">
+    <div className="CartPage grid">
       <div className="CartPage__button-back">
         <ButtonBack />
       </div>

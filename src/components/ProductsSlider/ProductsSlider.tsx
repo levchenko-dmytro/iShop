@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductsSlider.scss';
 import { ProductCard } from '../ProductCard';
 import { Product } from '../../types/Product';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import { Dimensions } from '../../services/Dimensions';
 
 type Props = {
   products: Product[];
@@ -12,35 +11,26 @@ type Props = {
 };
 
 export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
-  const { onDesktop, onMobile, onTablet, gap } = Dimensions;
-
-  const { cardWidth } = useWindowDimensions();
-  const SLIDER_WIDTH =
-    cardWidth === onDesktop.cardWidth
-      ? onDesktop.screenWidth - onDesktop.padding * 2
-      : cardWidth === onTablet.cardWidth
-        ? onTablet.screenWidth - onTablet.padding * 2
-        : onMobile.screenWidth - onMobile.padding * 2;
-
-  const CARDS_QNT = products.length;
-  const GAPS_QNT = products.length - 1;
-
-  const END_PSN =
-    cardWidth === onDesktop.cardWidth
-      ? CARDS_QNT - 4
-      : cardWidth === onTablet.cardWidth
-        ? CARDS_QNT - 2
-        : CARDS_QNT - 1;
-
-  const PRODUCT_CARD_CONTAINER_WIDTH = CARDS_QNT * cardWidth + GAPS_QNT * gap;
-
+  const { screenWidth } = useWindowDimensions();
   const [slideIndex, setSlideIndex] = useState(0);
+  const [endPosition, setEndPosition] = useState(0);
+  const CARDS_QNT = products.length;
+
+  useEffect(() => {
+    if (screenWidth >= 1200) {
+      setEndPosition(CARDS_QNT - 4);
+    } else if (screenWidth >= 640 && screenWidth < 1200) {
+      setEndPosition(CARDS_QNT - 2);
+    } else {
+      setEndPosition(CARDS_QNT - 1);
+    }
+  }, [CARDS_QNT, screenWidth]);
 
   const slideCards = (slideTo: string) => {
     if (slideTo === 'next') {
-      setSlideIndex(slideIndex !== END_PSN ? slideIndex + 1 : 0);
+      setSlideIndex(slideIndex !== endPosition ? slideIndex + 1 : 0);
     } else if (slideTo === 'prev') {
-      setSlideIndex(slideIndex !== 0 ? slideIndex - 1 : END_PSN);
+      setSlideIndex(slideIndex !== 0 ? slideIndex - 1 : endPosition);
     }
   };
 
@@ -58,7 +48,7 @@ export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
 
     x2 = event.touches[0].clientX;
 
-    if (x1 - x2 < 0 && slideIndex !== END_PSN) {
+    if (x1 - x2 < 0 && slideIndex !== endPosition) {
       slideCards('next');
     } else if (x1 - x2 > 0 && slideIndex !== 0) {
       slideCards('prev');
@@ -85,25 +75,20 @@ export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
             type="button"
             className="ProductsSlider__button ProductsSlider__button--next"
             onClick={() => slideCards('next')}
-            disabled={slideIndex === END_PSN}
+            disabled={slideIndex === endPosition}
           />
         </div>
       </div>
 
       <div
         className="ProductsSlider__wrapper"
-        style={{
-          width: `${SLIDER_WIDTH}px`,
-          overflow: cardWidth === onDesktop.cardWidth ? 'hidden' : 'visible',
-        }}
         onTouchEnd={handleTouchStart}
         onTouchMove={handleTouchMove}
       >
         <ul
           className="ProductsSlider__container"
           style={{
-            width: PRODUCT_CARD_CONTAINER_WIDTH,
-            transform: `translateX(-${slideIndex * (cardWidth + gap)}px)`,
+            transform: `translateX(calc(-${slideIndex * 100}% - ${slideIndex * 16}px))`,
           }}
         >
           {products.map(product => (

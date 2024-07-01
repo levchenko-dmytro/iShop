@@ -4,8 +4,6 @@
 
 .CartPage {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
   column-gap: 24px;
 
   &__button-back {
@@ -55,7 +53,6 @@
 
 @include onTablet {
   .CartPage {
-    grid-template-columns: repeat(12, 1fr);
     column-gap: 16px;
 
     &__title {
@@ -76,8 +73,6 @@
 
 @include onDesktop {
   .CartPage {
-    grid-template-columns: repeat(24, 1fr);
-
     &__list {
       grid-column: 1 / 17;
     }

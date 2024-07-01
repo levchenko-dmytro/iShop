@@ -109,7 +109,7 @@
     height: 181px;
   }
 
-  @media screen and (min-width: 748px) {
+  @media screen and (min-width: 768px) {
     grid-column: span 4;
   }
  }
@@ -118,6 +118,8 @@
 @include onDesktop {
  .ProductCard {
     grid-column: span 6;
+
+    width: 272px;
 
     &__img-wrapper {
       width: 208px;

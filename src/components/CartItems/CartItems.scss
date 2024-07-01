@@ -25,6 +25,7 @@
   &__link {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     column-gap: 16px;
     transition: all $duration;
 
@@ -60,7 +61,7 @@
   }
 
   &__name-wrapper {
-    width: 128px;
+    min-width: 128px;
   }
 
   &__name {
@@ -137,6 +138,7 @@
     &__item {
       flex-direction: row;
       row-gap: 0;
+      column-gap: 24px;
       justify-content: space-between;
       padding: 24px;
     }
@@ -150,7 +152,7 @@
     }
 
     &__name-wrapper {
-      width: 172px;
+      min-width: 172px;
     }
 
     &__right-part {
@@ -166,10 +168,6 @@
 
     &__item {
       padding: 24px;
-    }
-
-    &__name-wrapper {
-      width: 295px;
     }
   }
 }

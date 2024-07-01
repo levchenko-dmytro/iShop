@@ -4,7 +4,6 @@ import { Product } from './types/Product';
 import { getProducts } from './api/products';
 import { Category } from './types/Category';
 import { Cart } from './types/Cart';
-import useWindowDimensions from './hooks/useWindowDimensions';
 
 type GlobalProps = {
   productsList: Product[];
@@ -65,28 +64,24 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
     return productsList.filter(item => item.category === type).length;
   };
 
-  const { pictureWidth } = useWindowDimensions();
-
-  const path = pictureWidth === 490 ? 'tablet' : 'desktop';
-
   const categoriesList = [
     {
       title: 'Mobile phones',
-      img: `img/Shop-by-category/${path}/mobiles.png`,
+      img: `img/Shop-by-category/desktop/mobiles.png`,
       color: '#fcdbc1',
       name: 'phones',
       qnt: getQntOfproducts('phones'),
     },
     {
       title: 'Tablets',
-      img: `img/Shop-by-category/${path}/tabs.png`,
+      img: `img/Shop-by-category/desktop/tabs.png`,
       color: '#8d8d92',
       name: 'tablets',
       qnt: getQntOfproducts('tablets'),
     },
     {
       title: 'Accessories',
-      img: `img/Shop-by-category/${path}/accessories.png`,
+      img: `img/Shop-by-category/desktop/accessories.png`,
       color: '#973d5f',
       name: 'accessories',
       qnt: getQntOfproducts('accessories'),

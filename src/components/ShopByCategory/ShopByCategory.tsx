@@ -17,10 +17,9 @@ export const ShopByCategory = () => {
           return (
             <li className="categories__item" key={title}>
               <Link to={`/${name}`} className="categories__link">
-                <div
-                  className="categories__wrapper-img"
-                  style={{ backgroundImage: `url(${img})` }}
-                />
+                <div className="categories__wrapper-img">
+                  <img className="categories__img" src={img} alt="title" />
+                </div>
 
                 <h3 className="categories__title">{title}</h3>
 

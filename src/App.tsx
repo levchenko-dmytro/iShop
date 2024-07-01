@@ -5,8 +5,8 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BreadCrumbs } from './components/BreadCrumbs';
 import { DropDownMenu } from './components/DropDownMenu';
-import classNames from 'classnames';
 import { GlobalContext } from './GlobalContext';
+import classNames from 'classnames';
 
 export const App: React.FC = () => {
   const { pathname } = useLocation();
@@ -32,11 +32,10 @@ export const App: React.FC = () => {
         <DropDownMenu />
       </header>
 
-      <div className="wrapper">
-        <div className={classNames('main', { container: '/' !== pathname })}>
-          {isVisible && <BreadCrumbs />}
-          <Outlet />
-        </div>
+      <div className={classNames('main', { container: pathname !== '/' })}>
+        {isVisible && <BreadCrumbs />}
+
+        <Outlet />
       </div>
 
       <Footer />

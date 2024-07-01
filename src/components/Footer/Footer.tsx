@@ -27,8 +27,8 @@ export const Footer = () => {
   window.addEventListener('scroll', toggleVisible);
 
   return (
-    <footer className="footer">
-      <div className="container footer__container">
+    <footer className="footer container">
+      <div className="footer__container">
         <Logo />
 
         <div className="footer__links">

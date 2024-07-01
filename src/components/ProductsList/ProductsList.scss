@@ -3,11 +3,16 @@
 @import '../../utils/mixins';
 
 .Products {
-  display: flex;
+  --width-sort: 100%;
+  --width-pagination: 100%;
+  --icon-size: 16px;
+
+  column-gap: 16px;
   flex-direction: column;
   row-gap: 40px;
 
   &__top {
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
     row-gap: 8px;
@@ -26,6 +31,7 @@
   }
 
   &__selects {
+    grid-column: 1 / -1;
     display: flex;
     column-gap: 16px;
   }
@@ -43,10 +49,6 @@
   }
 
   &__select {
-    --width-sort: 176px;
-    --width-pagination: 128px;
-    --icon-size: 16px;
-
     padding: 10px 12px;
     appearance: none;
     background-color: $gray-white;
@@ -72,22 +74,29 @@
   }
 
   &__list {
+    grid-column: 1 / -1;
     margin-top: -16px;
 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 40px 16px;
+  }
+
+ &__pagination {
+    grid-column: 1 / -1;
+    justify-self: center;
   }
 }
 
 @include onTablet {
-  .Products__list {
-    grid-template-columns: repeat(12, 1fr);
-  }
-}
+  .Products {
+    --width-sort: 176px;
+    --width-pagination: 128px;
 
-@include onDesktop {
-  .Products__list {
-    grid-template-columns: repeat(24, 1fr);
+    &__selects {
+      grid-column: span 7;
+    }
+
+    &__list {
+      grid-column: 1 / -1;
+    }
   }
 }

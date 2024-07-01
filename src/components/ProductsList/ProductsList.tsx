@@ -63,7 +63,7 @@ export const ProductsList: React.FC<Props> = ({ products }) => {
   return (
     <>
       {products.length > 0 && (
-        <div className="Products">
+        <div className="Products grid">
           <div className="Products__top">
             {!query && <h1 className="Products__title">{title}</h1>}
 
@@ -137,14 +137,16 @@ export const ProductsList: React.FC<Props> = ({ products }) => {
             </div>
           )}
 
-          <ul className="Products__list" data-cy="productList">
+          <ul className="Products__list grid" data-cy="productList">
             {itemsList.map(product => (
               <ProductCard product={product} key={product.id} />
             ))}
           </ul>
 
           {per !== sortedProducts.length && sortedProducts.length > 4 && (
-            <Pagination total={total} perPage={per} />
+            <div className="Products__pagination">
+              <Pagination total={total} perPage={per} />
+            </div>
           )}
         </div>
       )}

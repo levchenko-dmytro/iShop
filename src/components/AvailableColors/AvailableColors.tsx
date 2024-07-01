@@ -26,11 +26,17 @@ export const AvailableColors: React.FC<Props> = ({
       }}
     >
       {colorsAvailable.map(color => {
+        let backColor = color;
+
+        if (color.includes(' ')) {
+          backColor = backColor.replace(' ', '-');
+        }
+
         return (
           <li key={color}>
             <Link
               className="AvailableColors__link-color"
-              to={`../${getLink(linkPart, capacity, color)}`}
+              to={`../${getLink(linkPart, capacity, backColor)}`}
               style={{
                 borderColor: `${currentColor === color ? '#313237' : ''}`,
               }}
@@ -38,7 +44,7 @@ export const AvailableColors: React.FC<Props> = ({
               <div
                 className="AvailableColors__link-color--content"
                 style={{
-                  backgroundColor: `${productColors[color]}`,
+                  backgroundColor: `${productColors[backColor]}`,
                 }}
               />
             </Link>
