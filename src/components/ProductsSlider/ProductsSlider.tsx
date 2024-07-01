@@ -14,6 +14,9 @@ export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
   const { screenWidth } = useWindowDimensions();
   const [slideIndex, setSlideIndex] = useState(0);
   const [endPosition, setEndPosition] = useState(0);
+  const [touchStartPos, setTouchStartPos] = useState<null | number>(null);
+  const [isSwiping, setIsSwiping] = useState(false);
+  const [swipingDistance, setSwipingDistance] = useState(0);
   const CARDS_QNT = products.length;
 
   useEffect(() => {
@@ -34,28 +37,47 @@ export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
     }
   };
 
-  let x1: null | number = null;
-  let x2: null | number = null;
-
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    x1 = event.changedTouches[0].clientX;
-  };
-
-  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (!x1) {
+    if (event.touches.length !== 1) {
       return;
     }
 
-    x2 = event.touches[0].clientX;
+    setTouchStartPos(event.touches[0].screenX);
+    setIsSwiping(true);
+  };
 
-    if (x1 - x2 < 0 && slideIndex !== endPosition) {
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (event.touches.length !== 1) {
+      return;
+    }
+
+    if (!isSwiping) {
+      return;
+    }
+
+    if (!touchStartPos) {
+      return;
+    }
+
+    setSwipingDistance(touchStartPos - event.touches[0].screenX);
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (event.changedTouches.length !== 1) {
+      return;
+    }
+
+    if (swipingDistance > 0) {
       slideCards('next');
-    } else if (x1 - x2 > 0 && slideIndex !== 0) {
+    }
+
+    if (swipingDistance < 0) {
       slideCards('prev');
     }
 
-    x1 = null;
-    x2 = null;
+    setIsSwiping(false);
+    setTouchStartPos(null);
+    setSwipingDistance(0);
   };
 
   return (
@@ -82,8 +104,9 @@ export const ProductsSlider: React.FC<Props> = ({ products, title }) => {
 
       <div
         className="ProductsSlider__wrapper"
-        onTouchEnd={handleTouchStart}
+        onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <ul
           className="ProductsSlider__container"
