@@ -9,8 +9,7 @@ type Props = {
   product: Product;
 };
 
-const imageLinkPart =
-  'https://levchenko-dmytro.github.io/phone-catalog/updated_data/';
+const imageLinkPart = 'https://levchenko-dmytro.github.io/iShop/updated_data/';
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
   const [searchParams] = useSearchParams();

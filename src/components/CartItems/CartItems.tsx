@@ -30,7 +30,7 @@ export const CartItems: React.FC = () => {
   };
 
   const imageLinkPart =
-    'https://levchenko-dmytro.github.io/phone-catalog/updated_data/';
+    'https://levchenko-dmytro.github.io/iShop/updated_data/';
 
   return (
     <ul className="CartItems">

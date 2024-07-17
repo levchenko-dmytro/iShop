@@ -8,8 +8,7 @@ type Props = {
   pictures: string[];
 };
 
-const imageLinkPart =
-  'https://levchenko-dmytro.github.io/phone-catalog/updated_data';
+const imageLinkPart = 'https://levchenko-dmytro.github.io/iShop/updated_data';
 
 export const ProductPictures: React.FC<Props> = ({ pictures }) => {
   const [mainPicture, setMainPicture] = useState('');

@@ -14,7 +14,7 @@ const pictures = [
 ];
 
 let ANIMATION_DURATION = '500ms';
-const imageLinkPart = 'https://levchenko-dmytro.github.io/phone-catalog/';
+const imageLinkPart = 'https://levchenko-dmytro.github.io/iShop/';
 
 export const Banner = () => {
   const [current, setCurrent] = useState(1);

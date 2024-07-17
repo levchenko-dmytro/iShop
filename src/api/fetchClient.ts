@@ -1,5 +1,4 @@
-const BASE_URL =
-  'https://levchenko-dmytro.github.io/phone-catalog/updated_data/api';
+const BASE_URL = 'https://levchenko-dmytro.github.io/iShop/updated_data/api';
 
 function wait(delay: number) {
   return new Promise(resolve => setTimeout(resolve, delay));
