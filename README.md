@@ -5,7 +5,7 @@
   For creating this PR such technologies were used as: React, Sass.
 
 # Link to the preview:
-  - [DEMO LINK](https://levchenko-dmytro.github.io/phone-catalog)
+  - [DEMO LINK](https://levchenko-dmytro.github.io/iShop)
 
 # Link to the mockup:
   - [figma design](https://www.figma.com/file/uEetgWenSRxk9jgiym6Yzp/Phone-catalog-redesign?node-id=1%3A2)
